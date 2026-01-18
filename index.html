@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WuzUP - Find Something Fun Tonight</title>
+  <meta name="description" content="Entertainment, nightlife, and date planning made easy. Find the perfect night out in 30 seconds. Events, dining, parties â€” bundled, bookable, a little bit VIP.">
+  <meta property="og:title" content="WuzUP - Find Something Fun Tonight">
+  <meta property="og:description" content="I just planned the perfect night out! Find yours free.">
+  <meta property="og:image" content="https://wuzup.dubltap.io/og-image.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /*
+     * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     * WUZUP - GOLDEN RATIO DESIGN SYSTEM
+     * Ï† (Phi) = 1.618033988749895
+     * 
+     * "Entertainment, bundled, bookable, a little bit VIP."
+     * â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     */
+    
+    :root {
+      /* â•â• GOLDEN CONSTANTS â•â• */
+      --phi: 1.618033988749895;
+      --phi-inv: 0.618033988749895;
+      
+      /* â•â• GOLDEN TYPOGRAPHY â•â• */
+      --text-xs: 10px;
+      --text-sm: 13px;
+      --text-base: 16px;
+      --text-lg: 21px;
+      --text-xl: 26px;
+      --text-2xl: 34px;
+      --text-3xl: 42px;
+      --text-4xl: 55px;
+      --text-5xl: 68px;
+      
+      /* â•â• FIBONACCI SPACING â•â• */
+      --space-3xs: 3px;
+      --space-2xs: 5px;
+      --space-xs: 8px;
+      --space-sm: 13px;
+      --space-md: 21px;
+      --space-lg: 34px;
+      --space-xl: 55px;
+      --space-2xl: 89px;
+      
+      /* â•â• GOLDEN TIMING â•â• */
+      --duration-fast: 162ms;
+      --duration-base: 262ms;
+      --duration-slow: 424ms;
+      
+      /* â•â• GOLDEN EASING â•â• */
+      --ease-golden: cubic-bezier(0.382, 0, 0.618, 1);
+      --ease-golden-out: cubic-bezier(0, 0.618, 0.382, 1);
+      --ease-golden-bounce: cubic-bezier(0.382, 1.618, 0.618, 1);
+      
+      /* â•â• NIGHTLIFE COLOR PALETTE â•â• */
+      --bg-dark: #0a0a0f;
+      --bg-card: #111118;
+      --bg-elevated: #1a1a24;
+      
+      --pink-400: #f472b6;
+      --pink-500: #ec4899;
+      --pink-600: #db2777;
+      --orange-400: #fb923c;
+      --orange-500: #f97316;
+      --yellow-400: #facc15;
+      --cyan-400: #22d3ee;
+      --purple-400: #a78bfa;
+      --green-400: #4ade80;
+      
+      --text-primary: #fafafa;
+      --text-secondary: #d4d4d8;
+      --text-muted: #a1a1aa;
+      
+      /* â•â• GRADIENTS â•â• */
+      --gradient-brand: linear-gradient(137.5deg, var(--pink-500), var(--orange-500));
+      --gradient-vip: linear-gradient(137.5deg, var(--yellow-400), var(--orange-400));
+      --gradient-glow: radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.15), transparent 70%);
+      --gradient-night: linear-gradient(137.5deg, #0a0a0f, #1a1a24, #0f0a1a);
+      
+      /* â•â• SHADOWS â•â• */
+      --shadow-sm: 0 2px 5px rgba(0,0,0,0.3);
+      --shadow-md: 0 5px 13px rgba(0,0,0,0.35);
+      --shadow-lg: 0 13px 34px rgba(0,0,0,0.4);
+      --shadow-glow: 0 0 34px rgba(236, 72, 153, 0.25);
+      
+      /* â•â• RADIUS â•â• */
+      --radius-sm: 5px;
+      --radius-md: 8px;
+      --radius-lg: 13px;
+      --radius-xl: 21px;
+      --radius-2xl: 34px;
+      --radius-full: 9999px;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--gradient-night);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: var(--phi);
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-lg);
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* â•â• ANIMATED BACKGROUND â•â• */
+    .bg-effects {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    .glow-orb {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(120px);
+      animation: pulseGlow 8s ease-in-out infinite;
+    }
+    
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.25; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.1); }
+    }
+    
+    .glow-orb:nth-child(1) { top: -20%; left: -10%; background: rgba(236, 72, 153, 0.2); }
+    .glow-orb:nth-child(2) { bottom: -20%; right: -10%; background: rgba(249, 115, 22, 0.2); animation-delay: 2s; }
+    .glow-orb:nth-child(3) { top: 40%; left: 50%; background: rgba(34, 211, 238, 0.1); animation-delay: 4s; }
+    
+    .party-icon {
+      position: absolute;
+      font-size: var(--text-2xl);
+      opacity: 0.1;
+      animation: floatParty 10s ease-in-out infinite;
+    }
+    
+    @keyframes floatParty {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(10deg); }
+    }
+    
+    /* â•â• ANNOUNCEMENT BAR â•â• */
+    .announcement-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: var(--gradient-brand);
+      color: white;
+      padding: var(--space-sm) var(--space-lg);
+      text-align: center;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      z-index: 1000;
+      cursor: pointer;
+    }
+    
+    body.has-announcement { padding-top: 42px; }
+    
+    /* â•â• HEADER â•â• */
+    header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+      animation: fadeUp var(--duration-slow) var(--ease-golden-out);
+    }
+    
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(34px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-md);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: var(--text-3xl);
+      font-weight: 800;
+      margin-bottom: var(--space-lg);
+      background: linear-gradient(135deg, #39ff14, #00ff41);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(57, 255, 20, 0.5);
+    }
+    
+    .logo-icon {
+      width: 100px;
+      height: 120px;
+      flex-shrink: 0;
+    }
+    
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(var(--text-3xl), 9vw, var(--text-4xl));
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: var(--space-sm);
+    }
+    
+    h1 .highlight {
+      background: var(--gradient-brand);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .subtitle {
+      font-size: var(--text-lg);
+      color: var(--text-secondary);
+    }
+    
+    /* â•â• SOCIAL PROOF â•â• */
+    .social-proof {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-lg);
+      margin-top: var(--space-lg);
+      flex-wrap: wrap;
+    }
+    
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+    }
+    
+    .proof-number {
+      font-weight: 700;
+      color: var(--pink-400);
+    }
+    
+    /* â•â• STAGES â•â• */
+    .stage { display: none; animation: fadeUp var(--duration-slow) var(--ease-golden-out); }
+    .stage.active { display: block; }
+    
+    /* â•â• QUIZ CARD â•â• */
+    .quiz-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(236, 72, 153, 0.15);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .quiz-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gradient-brand);
+    }
+    
+    /* â•â• PROGRESS â•â• */
+    .progress-bar {
+      display: flex;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-lg);
+    }
+    
+    .progress-step {
+      flex: 1;
+      height: 5px;
+      background: rgba(255,255,255,0.1);
+      border-radius: var(--radius-full);
+    }
+    
+    .progress-step.active { background: var(--pink-500); }
+    .progress-step.completed { background: var(--pink-400); }
+    
+    .question-number {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .question-text {
+      font-size: var(--text-xl);
+      font-weight: 600;
+      margin-bottom: var(--space-lg);
+    }
+    
+    /* â•â• OPTIONS â•â• */
+    .options-grid {
+      display: grid;
+      gap: var(--space-sm);
+    }
+    
+    .options-grid.two-col {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .option-btn {
+      padding: var(--space-md) var(--space-lg);
+      background: var(--bg-elevated);
+      border: 2px solid transparent;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all var(--duration-base) var(--ease-golden);
+      font-family: inherit;
+      font-size: var(--text-base);
+      color: var(--text-primary);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    
+    .option-btn:hover {
+      border-color: rgba(236, 72, 153, 0.4);
+      transform: translateX(5px);
+    }
+    
+    .option-btn.selected {
+      border-color: var(--pink-500);
+      background: rgba(236, 72, 153, 0.1);
+    }
+    
+    .option-icon { font-size: var(--text-xl); }
+    .option-label { font-weight: 500; }
+    .option-desc { font-size: var(--text-sm); color: var(--text-muted); margin-top: 2px; }
+    
+    /* â•â• MULTI-SELECT â•â• */
+    .option-btn.multi .check-indicator {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: var(--radius-sm);
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-xs);
+      transition: all var(--duration-fast);
+    }
+    
+    .option-btn.multi.selected .check-indicator {
+      background: var(--pink-500);
+      border-color: var(--pink-500);
+    }
+    
+    /* â•â• LOCATION INPUT â•â• */
+    .location-input-wrap {
+      position: relative;
+      margin-bottom: var(--space-md);
+    }
+    
+    .location-input {
+      width: 100%;
+      padding: var(--space-md) var(--space-lg);
+      padding-left: 50px;
+      background: var(--bg-elevated);
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      font-family: inherit;
+      font-size: var(--text-base);
+      color: var(--text-primary);
+      transition: all var(--duration-base);
+    }
+    
+    .location-input:focus {
+      outline: none;
+      border-color: var(--pink-500);
+    }
+    
+    .location-input::placeholder { color: var(--text-muted); }
+    
+    .location-icon {
+      position: absolute;
+      left: var(--space-md);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: var(--text-lg);
+    }
+    
+    .detect-btn {
+      position: absolute;
+      right: var(--space-sm);
+      top: 50%;
+      transform: translateY(-50%);
+      padding: var(--space-xs) var(--space-sm);
+      background: var(--gradient-brand);
+      border: none;
+      border-radius: var(--radius-md);
+      color: white;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    /* â•â• NAV BUTTONS â•â• */
+    .nav-row {
+      display: flex;
+      gap: var(--space-sm);
+      margin-top: var(--space-lg);
+    }
+    
+    .btn {
+      flex: 1;
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--radius-lg);
+      font-family: inherit;
+      font-size: var(--text-base);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--duration-base) var(--ease-golden);
+    }
+    
+    .btn-primary {
+      background: var(--gradient-brand);
+      color: white;
+      border: none;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-glow);
+    }
+    
+    .btn-primary:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+    
+    /* â•â• LOADING â•â• */
+    .loading-container {
+      text-align: center;
+      padding: var(--space-2xl) 0;
+    }
+    
+    .loading-icon {
+      font-size: var(--text-5xl);
+      margin-bottom: var(--space-lg);
+      animation: bounce 1s ease-in-out infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    
+    .loading-text {
+      font-size: var(--text-lg);
+      font-weight: 500;
+      margin-bottom: var(--space-md);
+    }
+    
+    .loading-steps {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      max-width: 320px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    
+    .loading-step {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      opacity: 0.5;
+      transition: all var(--duration-base);
+    }
+    
+    .loading-step.active { color: var(--pink-400); opacity: 1; }
+    .loading-step.completed { color: var(--text-secondary); opacity: 0.8; }
+    
+    .step-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-xs);
+    }
+    
+    .loading-step.completed .step-check {
+      background: var(--pink-500);
+      border-color: var(--pink-500);
+    }
+    
+    /* â•â• RESULTS HEADER â•â• */
+    .results-header {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    
+    .results-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: var(--text-2xl);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .vibe-match {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: var(--bg-card);
+      border: 1px solid var(--pink-500);
+      border-radius: var(--radius-full);
+      padding: var(--space-xs) var(--space-md);
+      font-size: var(--text-sm);
+      margin-top: var(--space-md);
+    }
+    
+    .vibe-match-score {
+      font-weight: 700;
+      color: var(--pink-400);
+    }
+    
+    /* â•â• ITINERARY CARD â•â• */
+    .itinerary-card {
+      background: var(--bg-card);
+      border: 2px solid var(--pink-500);
+      border-radius: var(--radius-2xl);
+      overflow: hidden;
+      margin-bottom: var(--space-lg);
+      position: relative;
+    }
+    
+    .itinerary-header {
+      background: var(--gradient-brand);
+      padding: var(--space-lg);
+      text-align: center;
+    }
+    
+    .itinerary-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: var(--text-xl);
+      font-weight: 700;
+      margin-bottom: var(--space-xs);
+    }
+    
+    .itinerary-meta {
+      font-size: var(--text-sm);
+      opacity: 0.9;
+    }
+    
+    .itinerary-body {
+      padding: var(--space-lg);
+    }
+    
+    .itinerary-item {
+      display: flex;
+      gap: var(--space-md);
+      padding: var(--space-md) 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .itinerary-item:last-child { border-bottom: none; }
+    
+    .item-time {
+      width: 60px;
+      flex-shrink: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-sm);
+      color: var(--pink-400);
+      font-weight: 500;
+    }
+    
+    .item-content { flex: 1; }
+    
+    .item-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    
+    .item-venue {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .item-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2xs);
+    }
+    
+    .item-tag {
+      padding: 2px var(--space-xs);
+      background: rgba(236, 72, 153, 0.15);
+      border-radius: var(--radius-sm);
+      font-size: var(--text-xs);
+      color: var(--pink-400);
+    }
+    
+    .item-tag.vip {
+      background: var(--gradient-vip);
+      color: #000;
+      font-weight: 600;
+    }
+    
+    .item-price {
+      font-weight: 600;
+      color: var(--green-400);
+      font-size: var(--text-sm);
+    }
+    
+    /* â•â• TIER SELECTOR â•â• */
+    .tier-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+    
+    .tier-btn {
+      padding: var(--space-md);
+      background: var(--bg-elevated);
+      border: 2px solid transparent;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      text-align: center;
+      transition: all var(--duration-base);
+      font-family: inherit;
+      color: var(--text-primary);
+    }
+    
+    .tier-btn:hover { border-color: rgba(255,255,255,0.2); }
+    
+    .tier-btn.active {
+      border-color: var(--pink-500);
+      background: rgba(236, 72, 153, 0.1);
+    }
+    
+    .tier-btn.vip { border-color: var(--yellow-400); }
+    .tier-btn.vip.active { background: rgba(250, 204, 21, 0.1); }
+    
+    .tier-icon { font-size: var(--text-xl); margin-bottom: var(--space-xs); }
+    .tier-name { font-weight: 600; font-size: var(--text-sm); }
+    .tier-price { font-size: var(--text-xs); color: var(--text-muted); margin-top: 2px; }
+    
+    /* â•â• VENUE CARDS â•â• */
+    .venue-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(236, 72, 153, 0.1);
+      border-radius: var(--radius-xl);
+      padding: var(--space-md);
+      margin-bottom: var(--space-sm);
+      display: flex;
+      gap: var(--space-md);
+      transition: all var(--duration-base);
+    }
+    
+    .venue-card:hover {
+      border-color: rgba(236, 72, 153, 0.3);
+      transform: translateY(-2px);
+    }
+    
+    .venue-emoji {
+      width: 50px;
+      height: 50px;
+      background: var(--bg-elevated);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-xl);
+      flex-shrink: 0;
+    }
+    
+    .venue-info { flex: 1; }
+    .venue-name { font-weight: 600; margin-bottom: 2px; }
+    .venue-type { font-size: var(--text-sm); color: var(--text-muted); }
+    
+    .venue-meta {
+      display: flex;
+      gap: var(--space-md);
+      margin-top: var(--space-xs);
+      font-size: var(--text-sm);
+    }
+    
+    .venue-meta span { color: var(--text-secondary); }
+    
+    .venue-actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      align-items: flex-end;
+      justify-content: center;
+    }
+    
+    .book-btn {
+      padding: var(--space-xs) var(--space-md);
+      background: var(--gradient-brand);
+      border: none;
+      border-radius: var(--radius-md);
+      color: white;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    
+    /* â•â• SHARE CARD â•â• */
+    .share-card {
+      background: linear-gradient(137.5deg, rgba(236, 72, 153, 0.15), rgba(249, 115, 22, 0.15));
+      border: 2px solid var(--pink-500);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-lg);
+      text-align: center;
+      margin-bottom: var(--space-md);
+    }
+    
+    .share-card h3 { font-size: var(--text-lg); margin-bottom: var(--space-xs); }
+    .share-card p { font-size: var(--text-sm); color: var(--text-secondary); margin-bottom: var(--space-md); }
+    
+    .share-buttons {
+      display: flex;
+      gap: var(--space-sm);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .share-btn {
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-lg);
+      border: none;
+      font-family: inherit;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      transition: all var(--duration-base);
+    }
+    
+    .share-btn:hover { transform: scale(1.05); }
+    .share-btn.twitter { background: #1da1f2; color: white; }
+    .share-btn.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+    .share-btn.copy { background: white; color: #000; }
+    .share-btn.group { background: var(--gradient-brand); color: white; }
+    
+    /* â•â• GROUP POLL â•â• */
+    .group-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(34, 211, 238, 0.3);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+    }
+    
+    .group-card h3 {
+      color: var(--cyan-400);
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-xs);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    
+    .group-card p { font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-md); }
+    
+    .group-link-box {
+      display: flex;
+      gap: var(--space-xs);
+    }
+    
+    .group-link-box input {
+      flex: 1;
+      padding: var(--space-sm);
+      background: var(--bg-elevated);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-xs);
+      color: var(--text-primary);
+    }
+    
+    .group-link-box button {
+      padding: var(--space-sm) var(--space-md);
+      background: var(--cyan-400);
+      color: #000;
+      border: none;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    /* â•â• REFERRAL CARD â•â• */
+    .referral-card {
+      background: linear-gradient(137.5deg, #fef3c7, #fde68a);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-lg);
+      text-align: center;
+      color: #78350f;
+      margin-bottom: var(--space-md);
+    }
+    
+    .referral-card h3 { font-size: var(--text-lg); margin-bottom: var(--space-xs); }
+    .referral-card p { font-size: var(--text-sm); margin-bottom: var(--space-md); }
+    
+    .referral-progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-md);
+    }
+    
+    .referral-dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(120,53,15,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+    
+    .referral-dot.filled { background: #78350f; color: white; }
+    
+    .referral-link-box {
+      display: flex;
+      gap: var(--space-xs);
+    }
+    
+    .referral-link-box input {
+      flex: 1;
+      padding: var(--space-sm);
+      border: 2px solid rgba(120,53,15,0.3);
+      border-radius: var(--radius-md);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-xs);
+      background: white;
+    }
+    
+    .referral-link-box button {
+      padding: var(--space-sm) var(--space-md);
+      background: #78350f;
+      color: white;
+      border: none;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    /* â•â• CTA SECTION â•â• */
+    .cta-section {
+      background: var(--bg-card);
+      border: 1px solid rgba(236, 72, 153, 0.1);
+      border-radius: var(--radius-2xl);
+      padding: var(--space-lg);
+      text-align: center;
+      margin-bottom: var(--space-md);
+    }
+    
+    .cta-section h3 { font-size: var(--text-xl); margin-bottom: var(--space-xs); }
+    .cta-section p { font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-md); }
+    
+    .cta-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-sm);
+      margin-bottom: var(--space-md);
+      text-align: left;
+    }
+    
+    .cta-feature {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: var(--text-sm);
+    }
+    
+    .cta-feature::before { content: 'âœ“'; color: var(--green-400); font-weight: bold; }
+    
+    /* â•â• MODALS â•â• */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+    }
+    
+    .modal-overlay.active { display: flex; }
+    
+    .modal {
+      background: var(--bg-card);
+      border: 1px solid rgba(236, 72, 153, 0.2);
+      border-radius: var(--radius-2xl);
+      max-width: 420px;
+      width: 100%;
+      padding: var(--space-xl);
+      position: relative;
+      animation: fadeUp var(--duration-slow) var(--ease-golden-out);
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: var(--text-xl);
+      cursor: pointer;
+    }
+    
+    .modal-icon { font-size: var(--text-4xl); text-align: center; margin-bottom: var(--space-md); }
+    .modal h2 { font-size: var(--text-xl); text-align: center; margin-bottom: var(--space-xs); }
+    .modal .subtitle { text-align: center; font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-lg); }
+    
+    .modal-input {
+      width: 100%;
+      padding: var(--space-md);
+      background: var(--bg-elevated);
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      font-family: inherit;
+      font-size: var(--text-base);
+      color: var(--text-primary);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .modal-input:focus { outline: none; border-color: var(--pink-500); }
+    .modal-input::placeholder { color: var(--text-muted); }
+    
+    .modal-benefits {
+      background: var(--bg-elevated);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+    
+    .modal-benefits ul { list-style: none; font-size: var(--text-sm); }
+    .modal-benefits li { padding: var(--space-xs) 0; display: flex; align-items: center; gap: var(--space-sm); }
+    .modal-benefits li::before { content: 'âœ“'; color: var(--green-400); font-weight: bold; }
+    
+    .modal-terms { text-align: center; font-size: var(--text-xs); color: var(--text-muted); margin-top: var(--space-md); }
+    .modal-terms a { color: var(--pink-400); }
+    
+    /* â•â• TOAST â•â• */
+    .toast {
+      position: fixed;
+      bottom: var(--space-lg);
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--bg-card);
+      border: 1px solid var(--pink-500);
+      color: var(--text-primary);
+      padding: var(--space-md) var(--space-lg);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-sm);
+      z-index: 3000;
+      transition: transform var(--duration-base) var(--ease-golden-bounce);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    
+    /* â•â• FOOTER â•â• */
+    .footer {
+      text-align: center;
+      padding: var(--space-lg) 0;
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+    }
+    
+    .footer a { color: var(--pink-400); text-decoration: none; }
+    
+    .hidden { display: none !important; }
+    
+    @media (max-width: 600px) {
+      .tier-selector { grid-template-columns: 1fr; }
+      .cta-features { grid-template-columns: 1fr; }
+      .options-grid.two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="has-announcement">
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" onclick="showUpgradeModal()">
+    ðŸ° <span id="liveCount">1,284</span> nights planned today â€” <strong>Find yours free â†’</strong>
+  </div>
+  
+  <!-- Background -->
+  <div class="bg-effects">
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="glow-orb"></div>
+    <div class="party-icon" style="top: 15%; left: 8%;">ðŸ°</div>
+    <div class="party-icon" style="top: 25%; right: 12%; animation-delay: 2s;">ðŸ¸</div>
+    <div class="party-icon" style="bottom: 30%; left: 5%; animation-delay: 4s;">âœ¨</div>
+    <div class="party-icon" style="bottom: 20%; right: 8%; animation-delay: 1s;">ðŸŽµ</div>
+  </div>
+  
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Clean Neon Green Glow -->
+          <defs>
+            <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <linearGradient id="neonGreen" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#39ff14"/>
+              <stop offset="100%" style="stop-color:#00ff41"/>
+            </linearGradient>
+          </defs>
+          
+          <!-- Left Big Floppy Ear -->
+          <ellipse cx="28" cy="32" rx="18" ry="45" fill="none" stroke="url(#neonGreen)" stroke-width="3" filter="url(#neonGlow)" transform="rotate(-12 28 32)"/>
+          <ellipse cx="28" cy="32" rx="8" ry="30" fill="none" stroke="#39ff14" stroke-width="2" opacity="0.5" transform="rotate(-12 28 32)"/>
+          
+          <!-- Right Big Floppy Ear -->
+          <ellipse cx="92" cy="32" rx="18" ry="45" fill="none" stroke="url(#neonGreen)" stroke-width="3" filter="url(#neonGlow)" transform="rotate(12 92 32)"/>
+          <ellipse cx="92" cy="32" rx="8" ry="30" fill="none" stroke="#39ff14" stroke-width="2" opacity="0.5" transform="rotate(12 92 32)"/>
+          
+          <!-- Head -->
+          <circle cx="60" cy="95" r="40" fill="none" stroke="url(#neonGreen)" stroke-width="3" filter="url(#neonGlow)"/>
+          
+          <!-- Long Whiskers - Left Side -->
+          <line x1="2" y1="88" x2="28" y2="94" stroke="#39ff14" stroke-width="2.5" stroke-linecap="round" filter="url(#neonGlow)"/>
+          <line x1="0" y1="100" x2="26" y2="100" stroke="#39ff14" stroke-width="2.5" stroke-linecap="round" filter="url(#neonGlow)"/>
+          <line x1="2" y1="112" x2="28" y2="106" stroke="#39ff14" stroke-width="2.5" stroke-linecap="round" filter="url(#neonGlow)"/>
+          
+          <!-- Long Whiskers - Right Side -->
+          <line x1="118" y1="88" x2="92" y2="94" stroke="#39ff14" stroke-width="2.5" stroke-linecap="round" filter="url(#neonGlow)"/>
+          <line x1="120" y1="100" x2="94" y2="100" stroke="#39ff14" stroke-width="2.5" stroke-linecap="round" filter="url(#neonGlow)"/>
+          <line x1="118" y1="112" x2="92" y2="106" stroke="#39ff14" stroke-width="2.5" stroke-linecap="round" filter="url(#neonGlow)"/>
+          
+          <!-- Oversized Sunglasses -->
+          <ellipse cx="40" cy="88" rx="22" ry="16" fill="#050505" stroke="url(#neonGreen)" stroke-width="3" filter="url(#neonGlow)"/>
+          <ellipse cx="80" cy="88" rx="22" ry="16" fill="#050505" stroke="url(#neonGreen)" stroke-width="3" filter="url(#neonGlow)"/>
+          <!-- Bridge -->
+          <path d="M 58 88 Q 60 82 62 88" stroke="#39ff14" stroke-width="3" fill="none" filter="url(#neonGlow)"/>
+          <!-- Temple Arms -->
+          <line x1="10" y1="84" x2="20" y2="87" stroke="#39ff14" stroke-width="3" stroke-linecap="round" filter="url(#neonGlow)"/>
+          <line x1="100" y1="87" x2="110" y2="84" stroke="#39ff14" stroke-width="3" stroke-linecap="round" filter="url(#neonGlow)"/>
+          <!-- Lens Shine -->
+          <ellipse cx="32" cy="84" rx="5" ry="3" fill="#39ff14" opacity="0.3"/>
+          <ellipse cx="72" cy="84" rx="5" ry="3" fill="#39ff14" opacity="0.3"/>
+          
+          <!-- Nose -->
+          <ellipse cx="60" cy="108" rx="6" ry="5" fill="none" stroke="#39ff14" stroke-width="2.5" filter="url(#neonGlow)"/>
+          
+          <!-- Big Grin -->
+          <path d="M 32 118 Q 60 142 88 118" stroke="url(#neonGreen)" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#neonGlow)"/>
+          
+          <!-- Teeth -->
+          <rect x="46" y="118" width="12" height="10" rx="2" fill="none" stroke="#39ff14" stroke-width="2"/>
+          <rect x="62" y="118" width="12" height="10" rx="2" fill="none" stroke="#39ff14" stroke-width="2"/>
+          <line x1="52" y1="118" x2="52" y2="128" stroke="#39ff14" stroke-width="1.5"/>
+          <line x1="68" y1="118" x2="68" y2="128" stroke="#39ff14" stroke-width="1.5"/>
+        </svg>
+        WuzUP
+      </div>
+      <h1>Find Something <span class="highlight">Fun Tonight</span></h1>
+      <p class="subtitle">30 seconds â†’ Perfect night out â†’ Bundled & bookable</p>
+      
+      <div class="social-proof">
+        <div class="proof-item">
+          ðŸŽ« <span class="proof-number" id="totalPlans">127K</span> nights planned
+        </div>
+        <div class="proof-item">
+          â­ <span class="proof-number">4.9</span> avg rating
+        </div>
+      </div>
+    </header>
+    
+    <!-- Quiz Stage -->
+    <div class="stage active" id="quizStage">
+      <div class="quiz-card">
+        <div class="progress-bar" id="progressBar"></div>
+        <div class="question-number" id="questionNumber"></div>
+        <div class="question-text" id="questionText"></div>
+        <div class="location-input-wrap hidden" id="locationWrap">
+          <span class="location-icon">ðŸ“</span>
+          <input type="text" class="location-input" id="locationInput" placeholder="Enter city or neighborhood...">
+          <button class="detect-btn" onclick="detectLocation()">ðŸ“ Detect</button>
+        </div>
+        <div class="options-grid" id="optionsGrid"></div>
+        <div class="nav-row">
+          <button class="btn btn-secondary hidden" id="backBtn" onclick="prevQuestion()">â† Back</button>
+          <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Continue â†’</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Loading Stage -->
+    <div class="stage" id="loadingStage">
+      <div class="quiz-card">
+        <div class="loading-container">
+          <div class="loading-icon">ðŸ°</div>
+          <p class="loading-text">Curating your perfect night...</p>
+          <div class="loading-steps">
+            <div class="loading-step" id="loadStep1"><div class="step-check">âœ“</div><span>Scanning local events</span></div>
+            <div class="loading-step" id="loadStep2"><div class="step-check">âœ“</div><span>Matching your vibe</span></div>
+            <div class="loading-step" id="loadStep3"><div class="step-check">âœ“</div><span>Finding best dining spots</span></div>
+            <div class="loading-step" id="loadStep4"><div class="step-check">âœ“</div><span>Building your itinerary</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Results Stage -->
+    <div class="stage" id="resultsStage">
+      <div class="results-header">
+        <h2>ðŸ”¥ Your Night is Ready</h2>
+        <div class="vibe-match">
+          <span>Vibe Match:</span>
+          <span class="vibe-match-score" id="vibeScore">94%</span>
+        </div>
+      </div>
+      
+      <!-- Tier Selector -->
+      <div class="tier-selector" id="tierSelector">
+        <button class="tier-btn active" data-tier="budget" onclick="selectTier('budget')">
+          <div class="tier-icon">ðŸ’°</div>
+          <div class="tier-name">Budget</div>
+          <div class="tier-price" id="budgetPrice">~$50</div>
+        </button>
+        <button class="tier-btn" data-tier="classic" onclick="selectTier('classic')">
+          <div class="tier-icon">â­</div>
+          <div class="tier-name">Classic</div>
+          <div class="tier-price" id="classicPrice">~$120</div>
+        </button>
+        <button class="tier-btn vip" data-tier="vip" onclick="selectTier('vip')">
+          <div class="tier-icon">ðŸ‘‘</div>
+          <div class="tier-name">VIP</div>
+          <div class="tier-price" id="vipPrice">~$250</div>
+        </button>
+      </div>
+      
+      <!-- Itinerary Card -->
+      <div class="itinerary-card" id="itineraryCard"></div>
+      
+      <!-- Venue Options -->
+      <div id="venueOptions"></div>
+      
+      <!-- Share Card -->
+      <div class="share-card">
+        <h3>ðŸ“¤ Share Your Night</h3>
+        <p>Let friends know what you're up to or get the group to vote!</p>
+        <div class="share-buttons">
+          <button class="share-btn twitter" onclick="shareTwitter()">ð• Share</button>
+          <button class="share-btn instagram" onclick="shareInstagram()">ðŸ“· IG Story</button>
+          <button class="share-btn group" onclick="createGroupPoll()">ðŸ‘¥ Group Poll</button>
+          <button class="share-btn copy" onclick="copyShareLink()">ðŸ”— Copy</button>
+        </div>
+      </div>
+      
+      <!-- Group Poll Card -->
+      <div class="group-card hidden" id="groupCard">
+        <h3>ðŸ‘¥ Group Poll Created!</h3>
+        <p>Share this link and let your squad vote on the plan:</p>
+        <div class="group-link-box">
+          <input type="text" id="groupLink" readonly>
+          <button onclick="copyGroupLink()">Copy</button>
+        </div>
+      </div>
+      
+      <!-- Referral Card -->
+      <div class="referral-card">
+        <h3>ðŸŽ Give 3, Get VIP Free</h3>
+        <p>Share WuzUP with 3 friends and unlock VIP features for a month!</p>
+        <div class="referral-progress">
+          <div class="referral-dot" id="ref1">1</div>
+          <div class="referral-dot" id="ref2">2</div>
+          <div class="referral-dot" id="ref3">3</div>
+        </div>
+        <div class="referral-link-box">
+          <input type="text" id="referralLink" readonly>
+          <button onclick="copyReferralLink()">Copy</button>
+        </div>
+      </div>
+      
+      <!-- CTA -->
+      <div class="cta-section">
+        <h3>ðŸš€ Unlock WuzUP Pro</h3>
+        <p>Unlimited plans, VIP access, group features, and priority booking</p>
+        <div class="cta-features">
+          <div class="cta-feature">Unlimited night plans</div>
+          <div class="cta-feature">VIP venue access</div>
+          <div class="cta-feature">Group planning tools</div>
+          <div class="cta-feature">Skip-the-line perks</div>
+          <div class="cta-feature">Concierge support</div>
+          <div class="cta-feature">Exclusive deals</div>
+        </div>
+        <button class="btn btn-primary" style="width: 100%" onclick="showUpgradeModal()">
+          Start 7-Day Free Trial â€” $7.99/mo
+        </button>
+      </div>
+      
+      <button class="btn btn-secondary" style="width: 100%; margin-top: var(--space-md);" onclick="resetQuiz()">
+        ðŸ”„ Plan Another Night
+      </button>
+      
+      <div class="footer">
+        Made with ðŸ° by <a href="https://dubltap.io">dubltap.io</a><br>
+        <small>Entertainment, bundled, bookable, a little bit VIP.</small>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Email Modal -->
+  <div class="modal-overlay" id="emailModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('emailModal')">Ã—</button>
+      <div class="modal-icon">ðŸ°</div>
+      <h2>Your Night is Ready!</h2>
+      <p class="subtitle">Enter your email to save your plan and get exclusive deals</p>
+      <div class="modal-benefits">
+        <ul>
+          <li>Your personalized itinerary</li>
+          <li>Booking links and reservations</li>
+          <li>Weekly event highlights</li>
+        </ul>
+      </div>
+      <input type="email" class="modal-input" id="emailInput" placeholder="your@email.com">
+      <button class="btn btn-primary" style="width: 100%" onclick="submitEmail()">Save My Night â†’</button>
+      <p class="modal-terms">By continuing, you agree to our <a href="#">Terms</a>. Unsubscribe anytime.</p>
+    </div>
+  </div>
+  
+  <!-- Upgrade Modal -->
+  <div class="modal-overlay" id="upgradeModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('upgradeModal')">Ã—</button>
+      <div class="modal-icon">ðŸ‘‘</div>
+      <h2>Unlock WuzUP Pro</h2>
+      <p class="subtitle">The ultimate night out experience</p>
+      <div class="modal-benefits">
+        <ul>
+          <li>Unlimited night planning</li>
+          <li>VIP venue access & skip-the-line</li>
+          <li>Group planning & voting tools</li>
+          <li>Priority reservations</li>
+          <li>Exclusive member deals (up to 30% off)</li>
+          <li>Concierge support</li>
+        </ul>
+      </div>
+      <button class="btn btn-primary" style="width: 100%; margin-bottom: var(--space-sm);" onclick="subscribePro()">
+        Start 7-Day Free Trial â€” $7.99/mo
+      </button>
+      <button class="btn btn-secondary" style="width: 100%" onclick="closeModal('upgradeModal')">Maybe Later</button>
+      <p class="modal-terms">Cancel anytime. 30-day money back guarantee.</p>
+    </div>
+  </div>
+  
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <span id="toastIcon">âœ“</span>
+    <span id="toastText">Copied!</span>
+  </div>
+
+<script>
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// WUZUP - ENTERTAINMENT PLANNING APP
+// "Entertainment, bundled, bookable, a little bit VIP."
+// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+
+const PHI = 1.618033988749895;
+
+const API_BASE = window.location.hostname === 'localhost'
+  ? 'http://localhost:3003/api'
+  : 'https://api.wuzup.dubltap.io/api';
+
+// â•â• QUIZ DATA â•â•
+const QUESTIONS = [
+  {
+    id: 'occasion',
+    question: "What's the occasion?",
+    options: [
+      { value: 'casual', icon: 'ðŸ»', label: 'Just hanging out', desc: 'Low-key good time' },
+      { value: 'date', icon: 'ðŸ’•', label: 'Date night', desc: 'Impress someone special' },
+      { value: 'party', icon: 'ðŸŽ‰', label: 'Celebration', desc: 'Birthday, promotion, etc.' },
+      { value: 'group', icon: 'ðŸ‘¥', label: 'Group outing', desc: 'Friends or coworkers' }
+    ]
+  },
+  {
+    id: 'vibe',
+    question: "What vibe are you going for?",
+    options: [
+      { value: 'chill', icon: 'ðŸŒ™', label: 'Chill & relaxed', desc: 'Easy conversation' },
+      { value: 'energetic', icon: 'âš¡', label: 'High energy', desc: 'Dancing, excitement' },
+      { value: 'fancy', icon: 'âœ¨', label: 'Upscale & classy', desc: 'Dress to impress' },
+      { value: 'adventurous', icon: 'ðŸŽ­', label: 'Adventurous', desc: 'Something unique' }
+    ]
+  },
+  {
+    id: 'interests',
+    question: "What sounds good? (Pick up to 3)",
+    type: 'multi',
+    max: 3,
+    options: [
+      { value: 'live-music', icon: 'ðŸŽµ', label: 'Live music' },
+      { value: 'comedy', icon: 'ðŸ˜‚', label: 'Comedy' },
+      { value: 'dancing', icon: 'ðŸ’ƒ', label: 'Dancing' },
+      { value: 'sports', icon: 'ðŸˆ', label: 'Sports' },
+      { value: 'food', icon: 'ðŸ½ï¸', label: 'Great food' },
+      { value: 'drinks', icon: 'ðŸ¸', label: 'Craft cocktails' },
+      { value: 'art', icon: 'ðŸŽ¨', label: 'Art & culture' },
+      { value: 'games', icon: 'ðŸŽ®', label: 'Games & activities' }
+    ]
+  },
+  {
+    id: 'budget',
+    question: "What's your budget per person?",
+    options: [
+      { value: '50', icon: 'ðŸ’µ', label: 'Under $50', desc: 'Budget-friendly' },
+      { value: '100', icon: 'ðŸ’°', label: '$50-100', desc: 'Mid-range' },
+      { value: '200', icon: 'ðŸ’Ž', label: '$100-200', desc: 'Treat yourself' },
+      { value: '300', icon: 'ðŸ‘‘', label: '$200+', desc: 'VIP experience' }
+    ]
+  },
+  {
+    id: 'location',
+    question: "Where are you going out?",
+    type: 'location'
+  }
+];
+
+// â•â• VENUES DATABASE â•â•
+const VENUES = {
+  'live-music': [
+    { name: 'The Blue Note', type: 'Jazz Club', vibe: ['chill', 'fancy'], price: '$$', emoji: 'ðŸŽ·' },
+    { name: 'House of Blues', type: 'Concert Venue', vibe: ['energetic'], price: '$$$', emoji: 'ðŸŽ¸' },
+    { name: 'Whisky a Go Go', type: 'Rock Club', vibe: ['energetic', 'adventurous'], price: '$$', emoji: 'ðŸ¤˜' }
+  ],
+  'comedy': [
+    { name: 'The Comedy Store', type: 'Comedy Club', vibe: ['chill', 'adventurous'], price: '$$', emoji: 'ðŸŽ¤' },
+    { name: 'Laugh Factory', type: 'Comedy Club', vibe: ['chill'], price: '$$', emoji: 'ðŸ˜†' }
+  ],
+  'dancing': [
+    { name: 'Sound Nightclub', type: 'Dance Club', vibe: ['energetic'], price: '$$$', emoji: 'ðŸª©' },
+    { name: 'Exchange LA', type: 'Electronic Club', vibe: ['energetic', 'fancy'], price: '$$$', emoji: 'ðŸ’«' }
+  ],
+  'food': [
+    { name: 'Bestia', type: 'Italian', vibe: ['fancy', 'date'], price: '$$$', emoji: 'ðŸ' },
+    { name: 'RÃ©publique', type: 'French', vibe: ['fancy', 'chill'], price: '$$$', emoji: 'ðŸ¥' },
+    { name: 'Howlin Rays', type: 'Hot Chicken', vibe: ['adventurous'], price: '$$', emoji: 'ðŸ—' }
+  ],
+  'drinks': [
+    { name: 'The Varnish', type: 'Speakeasy', vibe: ['fancy', 'chill'], price: '$$', emoji: 'ðŸ¥ƒ' },
+    { name: 'Here & Now', type: 'Rooftop Bar', vibe: ['chill', 'date'], price: '$$', emoji: 'ðŸŒ†' },
+    { name: 'Death & Co', type: 'Cocktail Bar', vibe: ['fancy'], price: '$$$', emoji: 'ðŸ¸' }
+  ],
+  'default': [
+    { name: 'Local Favorite', type: 'Bar & Grill', vibe: ['chill'], price: '$$', emoji: 'ðŸ»' }
+  ]
+};
+
+// â•â• STATE â•â•
+let state = {
+  currentQuestion: 0,
+  answers: {},
+  multiSelect: [],
+  location: '',
+  selectedTier: 'budget',
+  result: null,
+  email: localStorage.getItem('userEmail') || null,
+  visitorId: localStorage.getItem('visitorId') || generateVisitorId(),
+  referralCount: parseInt(localStorage.getItem('referralCount') || '0')
+};
+
+function generateVisitorId() {
+  const id = 'wu_' + Math.random().toString(36).substr(2, 9);
+  localStorage.setItem('visitorId', id);
+  return id;
+}
+
+const $ = id => document.getElementById(id);
+
+// â•â• INIT â•â•
+function init() {
+  renderQuestion();
+  updateLiveCount();
+  updateReferralUI();
+  checkReferral();
+}
+
+function updateLiveCount() {
+  const base = 1284;
+  const hour = new Date().getHours();
+  // More activity in evening hours
+  const timeBoost = hour >= 17 && hour <= 23 ? 200 : 0;
+  const variation = Math.floor(Math.random() * 50) + timeBoost;
+  $('liveCount').textContent = (base + variation).toLocaleString();
+}
+
+function checkReferral() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const ref = urlParams.get('ref');
+  if (ref && ref !== state.visitorId) {
+    localStorage.setItem('referredBy', ref);
+  }
+}
+
+function updateReferralUI() {
+  for (let i = 1; i <= 3; i++) {
+    const dot = $(`ref${i}`);
+    if (dot && state.referralCount >= i) {
+      dot.classList.add('filled');
+      dot.textContent = 'âœ“';
+    }
+  }
+  const refLink = $('referralLink');
+  if (refLink) {
+    refLink.value = `https://wuzup.dubltap.io/?ref=${state.visitorId}`;
+  }
+}
+
+// â•â• QUIZ â•â•
+function renderQuestion() {
+  const q = QUESTIONS[state.currentQuestion];
+  
+  $('progressBar').innerHTML = QUESTIONS.map((_, i) => {
+    let cls = 'progress-step';
+    if (i < state.currentQuestion) cls += ' completed';
+    else if (i === state.currentQuestion) cls += ' active';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+  
+  $('questionNumber').textContent = `Question ${state.currentQuestion + 1} of ${QUESTIONS.length}`;
+  $('questionText').textContent = q.question;
+  
+  // Location question
+  if (q.type === 'location') {
+    $('optionsGrid').classList.add('hidden');
+    $('locationWrap').classList.remove('hidden');
+    $('locationInput').value = state.location;
+    $('nextBtn').disabled = !state.location;
+    
+    $('locationInput').oninput = (e) => {
+      state.location = e.target.value;
+      state.answers.location = e.target.value;
+      $('nextBtn').disabled = !e.target.value;
+    };
+  }
+  // Multi-select
+  else if (q.type === 'multi') {
+    $('locationWrap').classList.add('hidden');
+    $('optionsGrid').classList.remove('hidden');
+    $('optionsGrid').classList.add('two-col');
+    
+    $('optionsGrid').innerHTML = q.options.map(opt => `
+      <button class="option-btn multi ${state.multiSelect.includes(opt.value) ? 'selected' : ''}" 
+              onclick="toggleMulti('${opt.value}', ${q.max})">
+        <span class="option-icon">${opt.icon}</span>
+        <div class="option-label">${opt.label}</div>
+        <div class="check-indicator">âœ“</div>
+      </button>
+    `).join('');
+    
+    $('nextBtn').disabled = state.multiSelect.length === 0;
+  }
+  // Single select
+  else {
+    $('locationWrap').classList.add('hidden');
+    $('optionsGrid').classList.remove('hidden');
+    $('optionsGrid').classList.remove('two-col');
+    
+    $('optionsGrid').innerHTML = q.options.map(opt => `
+      <button class="option-btn ${state.answers[q.id] === opt.value ? 'selected' : ''}" 
+              onclick="selectOption('${opt.value}')">
+        <span class="option-icon">${opt.icon}</span>
+        <div>
+          <div class="option-label">${opt.label}</div>
+          <div class="option-desc">${opt.desc}</div>
+        </div>
+      </button>
+    `).join('');
+    
+    $('nextBtn').disabled = !state.answers[q.id];
+  }
+  
+  $('backBtn').classList.toggle('hidden', state.currentQuestion === 0);
+  $('nextBtn').textContent = state.currentQuestion === QUESTIONS.length - 1 ? 'Plan My Night â†’' : 'Continue â†’';
+}
+
+function selectOption(value) {
+  state.answers[QUESTIONS[state.currentQuestion].id] = value;
+  renderQuestion();
+}
+
+function toggleMulti(value, max) {
+  const idx = state.multiSelect.indexOf(value);
+  if (idx > -1) {
+    state.multiSelect.splice(idx, 1);
+  } else if (state.multiSelect.length < max) {
+    state.multiSelect.push(value);
+  }
+  state.answers.interests = state.multiSelect;
+  renderQuestion();
+}
+
+function detectLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        // Would normally reverse geocode
+        state.location = 'Los Angeles, CA';
+        state.answers.location = state.location;
+        $('locationInput').value = state.location;
+        $('nextBtn').disabled = false;
+        showToast('ðŸ“ Location detected!');
+      },
+      () => showToast('Could not detect location')
+    );
+  }
+}
+
+function nextQuestion() {
+  if (state.currentQuestion < QUESTIONS.length - 1) {
+    state.currentQuestion++;
+    state.multiSelect = state.answers.interests || [];
+    renderQuestion();
+  } else {
+    generateResults();
+  }
+}
+
+function prevQuestion() {
+  if (state.currentQuestion > 0) {
+    state.currentQuestion--;
+    state.multiSelect = state.answers.interests || [];
+    renderQuestion();
+  }
+}
+
+// â•â• RESULTS â•â•
+async function generateResults() {
+  showStage('loadingStage');
+  
+  const steps = ['loadStep1', 'loadStep2', 'loadStep3', 'loadStep4'];
+  for (let i = 0; i < steps.length; i++) {
+    await sleep(500);
+    $(steps[i]).classList.add('active');
+    if (i > 0) $(steps[i-1]).classList.remove('active');
+    $(steps[i]).classList.add('completed');
+  }
+  
+  await sleep(400);
+  
+  // Generate itinerary
+  const itinerary = generateItinerary();
+  state.result = itinerary;
+  
+  if (!state.email) {
+    showModal('emailModal');
+  }
+  
+  renderResults();
+  showStage('resultsStage');
+}
+
+function generateItinerary() {
+  const { occasion, vibe, interests, budget, location } = state.answers;
+  
+  // Calculate vibe score
+  const vibeScore = 85 + Math.floor(Math.random() * 14);
+  
+  // Get matching venues
+  const matchedVenues = [];
+  const interestList = interests || ['food', 'drinks'];
+  
+  interestList.forEach(interest => {
+    const venues = VENUES[interest] || VENUES.default;
+    const filtered = venues.filter(v => v.vibe.includes(vibe) || v.vibe.includes('chill'));
+    if (filtered.length > 0) {
+      matchedVenues.push(filtered[Math.floor(Math.random() * filtered.length)]);
+    }
+  });
+  
+  // Add food if not included
+  if (!interestList.includes('food') && matchedVenues.length < 3) {
+    const food = VENUES.food.filter(v => v.vibe.includes(vibe))[0] || VENUES.food[0];
+    matchedVenues.unshift(food);
+  }
+  
+  // Add drinks if not included
+  if (!interestList.includes('drinks') && matchedVenues.length < 3) {
+    const drinks = VENUES.drinks.filter(v => v.vibe.includes(vibe))[0] || VENUES.drinks[0];
+    matchedVenues.push(drinks);
+  }
+  
+  // Generate schedule
+  const schedule = [];
+  let time = 19; // Start at 7pm
+  
+  matchedVenues.forEach((venue, i) => {
+    const timeStr = `${time > 12 ? time - 12 : time}:${i === 0 ? '00' : '30'} ${time >= 12 ? 'PM' : 'AM'}`;
+    schedule.push({
+      time: timeStr,
+      venue,
+      duration: i === matchedVenues.length - 1 ? 'Late' : '1.5-2 hrs'
+    });
+    time += 2;
+  });
+  
+  // Calculate prices by tier
+  const basePrices = {
+    budget: 50 + Math.floor(Math.random() * 20),
+    classic: 100 + Math.floor(Math.random() * 40),
+    vip: 200 + Math.floor(Math.random() * 100)
+  };
+  
+  return {
+    vibeScore,
+    occasion,
+    vibe,
+    location,
+    schedule,
+    prices: basePrices
+  };
+}
+
+function renderResults() {
+  const { vibeScore, occasion, vibe, location, schedule, prices } = state.result;
+  
+  $('vibeScore').textContent = `${vibeScore}%`;
+  $('budgetPrice').textContent = `~$${prices.budget}`;
+  $('classicPrice').textContent = `~$${prices.classic}`;
+  $('vipPrice').textContent = `~$${prices.vip}`;
+  
+  renderItinerary();
+}
+
+function selectTier(tier) {
+  state.selectedTier = tier;
+  document.querySelectorAll('.tier-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tier === tier);
+  });
+  renderItinerary();
+}
+
+function renderItinerary() {
+  const { schedule, location, occasion, vibe, prices } = state.result;
+  const tier = state.selectedTier;
+  
+  const tierLabels = { budget: 'Budget Night', classic: 'Classic Night Out', vip: 'VIP Experience' };
+  const tierEmoji = { budget: 'ðŸ’°', classic: 'â­', vip: 'ðŸ‘‘' };
+  
+  $('itineraryCard').innerHTML = `
+    <div class="itinerary-header">
+      <div class="itinerary-title">${tierEmoji[tier]} ${tierLabels[tier]}</div>
+      <div class="itinerary-meta">ðŸ“ ${location} â€¢ ${capitalize(occasion)} â€¢ ${capitalize(vibe)} Vibe</div>
+    </div>
+    <div class="itinerary-body">
+      ${schedule.map(item => `
+        <div class="itinerary-item">
+          <div class="item-time">${item.time}</div>
+          <div class="item-content">
+            <div class="item-title">${item.venue.name}</div>
+            <div class="item-venue">${item.venue.type} â€¢ ${item.venue.price}</div>
+            <div class="item-tags">
+              ${item.venue.vibe.map(v => `<span class="item-tag">${capitalize(v)}</span>`).join('')}
+              ${tier === 'vip' ? '<span class="item-tag vip">VIP Access</span>' : ''}
+            </div>
+          </div>
+        </div>
+      `).join('')}
+      <div class="itinerary-item" style="border-bottom: none; justify-content: space-between;">
+        <span>Estimated Total (per person)</span>
+        <span class="item-price">$${prices[tier]}</span>
+      </div>
+    </div>
+  `;
+  
+  // Venue options
+  $('venueOptions').innerHTML = schedule.map(item => `
+    <div class="venue-card">
+      <div class="venue-emoji">${item.venue.emoji}</div>
+      <div class="venue-info">
+        <div class="venue-name">${item.venue.name}</div>
+        <div class="venue-type">${item.venue.type}</div>
+        <div class="venue-meta">
+          <span>ðŸ“ ${state.result.location}</span>
+          <span>${item.venue.price}</span>
+        </div>
+      </div>
+      <div class="venue-actions">
+        <button class="book-btn" onclick="bookVenue('${item.venue.name}')">Book Now</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+function bookVenue(name) {
+  trackEvent('book_click', { venue: name });
+  showToast(`Opening reservations for ${name}...`);
+}
+
+// â•â• SHARING â•â•
+function shareTwitter() {
+  const text = `Just planned my perfect night out with WuzUP! ðŸŽ‰\n\n${state.result.location} â€¢ ${capitalize(state.result.vibe)} Vibe â€¢ ${state.result.vibeScore}% Match\n\nPlan yours free ðŸ‘‡\nhttps://wuzup.dubltap.io/?ref=${state.visitorId}`;
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+  trackEvent('share', { platform: 'twitter' });
+}
+
+function shareInstagram() {
+  showToast('Screenshot your itinerary and share to Stories! ðŸ“¸');
+  trackEvent('share', { platform: 'instagram' });
+}
+
+function createGroupPoll() {
+  const pollId = 'poll_' + Math.random().toString(36).substr(2, 6);
+  $('groupLink').value = `https://wuzup.dubltap.io/poll/${pollId}`;
+  $('groupCard').classList.remove('hidden');
+  trackEvent('group_poll_created');
+}
+
+function copyGroupLink() {
+  navigator.clipboard?.writeText($('groupLink').value);
+  showToast('Group poll link copied! ðŸ‘¥');
+}
+
+function copyShareLink() {
+  navigator.clipboard?.writeText(`https://wuzup.dubltap.io/?ref=${state.visitorId}`);
+  showToast('Link copied!');
+  trackEvent('share', { platform: 'copy' });
+}
+
+function copyReferralLink() {
+  navigator.clipboard?.writeText($('referralLink').value);
+  showToast('Referral link copied!');
+}
+
+// â•â• EMAIL â•â•
+async function submitEmail() {
+  const email = $('emailInput').value.trim();
+  if (!email || !email.includes('@')) {
+    $('emailInput').style.borderColor = '#f87171';
+    return;
+  }
+  
+  state.email = email;
+  localStorage.setItem('userEmail', email);
+  
+  try {
+    await fetch(`${API_BASE}/subscribe`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        visitorId: state.visitorId,
+        source: 'quiz_complete',
+        occasion: state.answers.occasion,
+        referredBy: localStorage.getItem('referredBy')
+      })
+    });
+  } catch {}
+  
+  closeModal('emailModal');
+  showToast('Your night is saved! ðŸŽ‰');
+  trackEvent('email_signup');
+}
+
+function subscribePro() {
+  trackEvent('upgrade_click');
+  showToast('Opening checkout...');
+}
+
+function showUpgradeModal() {
+  showModal('upgradeModal');
+}
+
+// â•â• UTILITIES â•â•
+function showStage(stageId) {
+  document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+  $(stageId).classList.add('active');
+}
+
+function showModal(modalId) { $(modalId).classList.add('active'); }
+function closeModal(modalId) { $(modalId).classList.remove('active'); }
+
+function showToast(message) {
+  $('toastText').textContent = message;
+  $('toast').classList.add('show');
+  setTimeout(() => $('toast').classList.remove('show'), 2618);
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+function resetQuiz() {
+  state.currentQuestion = 0;
+  state.answers = {};
+  state.multiSelect = [];
+  state.location = '';
+  state.result = null;
+  $('groupCard').classList.add('hidden');
+  showStage('quizStage');
+  renderQuestion();
+}
+
+function trackEvent(event, data = {}) {
+  fetch(`${API_BASE}/track`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ event, data, visitorId: state.visitorId })
+  }).catch(() => {});
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
