@@ -970,6 +970,43 @@
     
     .modal-terms { text-align: center; font-size: var(--text-xs); color: var(--text-muted); margin-top: var(--space-md); }
     .modal-terms a { color: var(--pink-400); }
+
+    /* ══ PRICING TOGGLE ══ */
+    .pricing-toggle {
+      display: flex;
+      background: var(--bg-elevated);
+      border-radius: var(--radius-lg);
+      padding: 3px;
+      margin-bottom: var(--space-md);
+    }
+    .pricing-toggle-btn {
+      flex: 1;
+      padding: var(--space-sm) var(--space-md);
+      border: none;
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--duration-base);
+      background: transparent;
+      color: var(--text-muted);
+    }
+    .pricing-toggle-btn.active {
+      background: var(--gradient-brand);
+      color: white;
+    }
+    .pricing-toggle-btn .save-badge {
+      display: inline-block;
+      background: var(--green-400);
+      color: #000;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: var(--radius-full);
+      margin-left: 4px;
+      vertical-align: middle;
+    }
     
     /* ══ TOAST ══ */
     .toast {
@@ -1217,9 +1254,13 @@
           <div class="cta-feature">Concierge support</div>
           <div class="cta-feature">Exclusive deals</div>
         </div>
-        <button class="btn btn-primary" style="width: 100%" onclick="showUpgradeModal()">
-          Start 7-Day Free Trial — $7.99/mo
-        </button>
+        <div class="pricing-toggle">
+            <button class="pricing-toggle-btn active" onclick="setCtaPlan('monthly')">Monthly</button>
+            <button class="pricing-toggle-btn" onclick="setCtaPlan('annual')">Annual <span class="save-badge">SAVE 31%</span></button>
+          </div>
+          <button class="btn btn-primary" style="width: 100%" id="ctaSubscribeBtn" onclick="subscribePro('monthly')">
+            Start 7-Day Free Trial — $7.99/mo
+          </button>
       </div>
       
       <button class="btn btn-secondary" style="width: 100%; margin-top: var(--space-md);" onclick="resetQuiz()">
@@ -1270,9 +1311,13 @@
           <li>Concierge support</li>
         </ul>
       </div>
-      <button class="btn btn-primary" style="width: 100%; margin-bottom: var(--space-sm);" onclick="subscribePro()">
-        Start 7-Day Free Trial — $7.99/mo
-      </button>
+      <div class="pricing-toggle">
+            <button class="pricing-toggle-btn active" id="modalMonthlyToggle" onclick="setModalPlan('monthly')">Monthly</button>
+            <button class="pricing-toggle-btn" id="modalAnnualToggle" onclick="setModalPlan('annual')">Annual <span class="save-badge">SAVE 31%</span></button>
+          </div>
+          <button class="btn btn-primary" style="width: 100%; margin-bottom: var(--space-sm);" id="modalSubscribeBtn" onclick="subscribePro('monthly')">
+            Start 7-Day Free Trial — $7.99/mo
+          </button>
       <button class="btn btn-secondary" style="width: 100%" onclick="closeModal('upgradeModal')">Maybe Later</button>
       <p class="modal-terms">Cancel anytime. 30-day money back guarantee.</p>
     </div>
@@ -1838,9 +1883,59 @@ async function submitEmail() {
   trackEvent('email_signup');
 }
 
-function subscribePro() {
-  trackEvent('upgrade_click');
+async function subscribePro(plan) {
+  plan = plan || 'monthly';
+  const priceId = plan === 'annual'
+    ? 'price_1T1fUwBkYqg7J4R7QsL2AhWD'
+    : 'price_1T1fScBkYqg7J4R7RoUzsu4R';
+  trackEvent('upgrade_click', { plan, priceId });
   showToast('Opening checkout...');
+  try {
+    const resp = await fetch(`${API_BASE}/create-checkout-session`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        priceId,
+        plan,
+        visitorId: state.visitorId,
+        email: state.email || null
+      })
+    });
+    const data = await resp.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      showToast('Could not open checkout. Please try again.');
+    }
+  } catch (err) {
+    showToast('Checkout error. Please try again.');
+  }
+}
+
+function setCtaPlan(plan) {
+  const toggle = document.querySelector('.cta-section .pricing-toggle');
+  toggle.querySelectorAll('.pricing-toggle-btn').forEach(btn => btn.classList.remove('active'));
+  if (plan === 'annual') {
+    toggle.children[1].classList.add('active');
+    $('ctaSubscribeBtn').textContent = 'Start 7-Day Free Trial \u2014 $66.00/yr';
+    $('ctaSubscribeBtn').onclick = () => subscribePro('annual');
+  } else {
+    toggle.children[0].classList.add('active');
+    $('ctaSubscribeBtn').textContent = 'Start 7-Day Free Trial \u2014 $7.99/mo';
+    $('ctaSubscribeBtn').onclick = () => subscribePro('monthly');
+  }
+}
+
+function setModalPlan(plan) {
+  $('modalMonthlyToggle').classList.toggle('active', plan === 'monthly');
+  $('modalAnnualToggle').classList.toggle('active', plan === 'annual');
+  if (plan === 'annual') {
+    $('modalSubscribeBtn').textContent = 'Start 7-Day Free Trial \u2014 $66.00/yr';
+    $('modalSubscribeBtn').onclick = () => subscribePro('annual');
+  } else {
+    $('modalSubscribeBtn').textContent = 'Start 7-Day Free Trial \u2014 $7.99/mo';
+    $('modalSubscribeBtn').onclick = () => subscribePro('monthly');
+  }
 }
 
 function showUpgradeModal() {
