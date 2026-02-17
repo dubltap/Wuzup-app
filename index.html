@@ -1896,7 +1896,7 @@ function subscribePro(plan) {
     cancel_url: window.location.origin + '/?canceled=true'
   });
   if (state.email) params.set('email', state.email);
-  window.location.href = API_BASE.replace('/api', '') + '/create-checkout?' + params.toString();
+  window.location.href = API_BASE.replace(/\/api$/, '') + '/create-checkout?' + params.toString();
 }
 
 function setCtaPlan(plan) {
