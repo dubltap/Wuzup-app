@@ -1883,33 +1883,20 @@ async function submitEmail() {
   trackEvent('email_signup');
 }
 
-async function subscribePro(plan) {
+function subscribePro(plan) {
   plan = plan || 'monthly';
   const priceId = plan === 'annual'
     ? 'price_1T1fUwBkYqg7J4R7QsL2AhWD'
     : 'price_1T1fScBkYqg7J4R7RoUzsu4R';
   trackEvent('upgrade_click', { plan, priceId });
   showToast('Opening checkout...');
-  try {
-    const resp = await fetch(`${API_BASE}/create-checkout-session`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        priceId,
-        plan,
-        visitorId: state.visitorId,
-        email: state.email || null
-      })
-    });
-    const data = await resp.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      showToast('Could not open checkout. Please try again.');
-    }
-  } catch (err) {
-    showToast('Checkout error. Please try again.');
-  }
+  const params = new URLSearchParams({
+    priceId,
+    success_url: window.location.origin + '/?success=true',
+    cancel_url: window.location.origin + '/?canceled=true'
+  });
+  if (state.email) params.set('email', state.email);
+  window.location.href = API_BASE + '/create-checkout?' + params.toString();
 }
 
 function setCtaPlan(plan) {
