@@ -7,7 +7,7 @@
   <meta name="description" content="Entertainment, nightlife, and date planning made easy. Find the perfect night out in 30 seconds. Events, dining, parties — bundled, bookable, a little bit VIP.">
   <meta property="og:title" content="WuzUP - Find Something Fun Tonight">
   <meta property="og:description" content="I just planned the perfect night out! Find yours free.">
-  <meta property="og:image" content="https://wuzup.dubltap.io/og-image.png">
+  <meta property="og:image" content="https://wuzup.dubltap.io/hog-image.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1535,20 +1535,32 @@ function toggleMulti(value, max) {
 }
 
 function detectLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        // Would normally reverse geocode
-        state.location = 'Los Angeles, CA';
-        state.answers.location = state.location;
-        $('locationInput').value = state.location;
-        $('nextBtn').disabled = false;
-        showToast('📍 Location detected!');
-      },
-      () => showToast('Could not detect location')
-    );
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            async (pos) => {
+              const { latitude, longitude } = pos.coords;
+              try {
+                const resp = await fetch(
+                  `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json&addressdetails=1`,
+  { headers: { 'Accept-Language': 'en' } }
+                );
+                const data = await resp.json();
+                const addr = data.address || {};
+                const city = addr.city || addr.town || addr.village || addr.county || '';
+                const stateAbbr = addr.state || '';
+                state.location = city && stateAbbr ? `${city}, ${stateAbbr}` : data.display_name || `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
+  } catch {
+                state.location = `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
   }
-}
+              state.answers.location = state.location;
+              $('locationInput').value = state.location;
+              $('nextBtn').disabled = false;
+              showToast('📍 Location detected!');
+  },
+            () => showToast('Could not detect location')
+          );
+  }
+  }
 
 function nextQuestion() {
   if (state.currentQuestion < QUESTIONS.length - 1) {
